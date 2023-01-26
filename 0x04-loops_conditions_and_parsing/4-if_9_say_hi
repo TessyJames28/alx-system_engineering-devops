@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# bash script that display's "Hi" after the nineth count of Best School
+
+a=1
+
+while [ "$a" -le 10 ]; do
+	echo "Best School"
+	if [ $a -eq 9 ]; then
+		echo "Hi"
+	fi
+	((a++))
+done
