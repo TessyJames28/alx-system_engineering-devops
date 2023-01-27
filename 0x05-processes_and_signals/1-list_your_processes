@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script that lists processes, including those without PPT
+
+ps -auxf
