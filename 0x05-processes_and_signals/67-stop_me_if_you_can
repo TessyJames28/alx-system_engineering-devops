@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# stops an infintely running process
+
+skill "$(pgrep -f 7-highlander)"
