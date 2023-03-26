@@ -1,4 +1,4 @@
-Host 18.233.65.61
+Host 54.236.51.149
 	User ubuntu
 	IdentityFile ~/.ssh/school
 	PubKeyAuthentication yes
