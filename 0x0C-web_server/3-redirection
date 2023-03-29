@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# configure a web server to display "hello world" and listen to port 80
+
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+SERVER-CONFIG=\
+"SERVER	{
+	listen 80 default_server;
+	listen [::]:80  default_server;
+
+	root /var/www/html;
+	index index.html index.htm index.nginx-debia.html;
+	server_name _;
+	
+	location / {
+		try_files \$uri \$uri/ =301;
+	}
+	if (\$request_filename ~ redirect_me){
+		rewrite ^ https://www.tjtechhub.com permanent;
+	}	
+
+}"
+
+bash -c "echo -e 'SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+service nginx restart
