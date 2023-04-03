@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# script that configures a HAproxy on the server
+
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install haproxy
+service haproxy start
+
+FILE_CONFIG="frontend myserver
+	bind *:80
+	default_backend myserver_backend
+
+backend myserver_backend
+	balance roundrobin
+	server server1 100.25.119.211:80 check
+	server server2 18.208.120.19:80 check"
+
+echo "$FILE_CONFIG" >> /etc/haproxy/haproxy.cfg
+service haproxy restart
