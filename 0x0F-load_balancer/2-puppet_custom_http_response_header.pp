@@ -1,6 +1,6 @@
 #manifest that setup a custom HTTP header for web server
 
-package {'install nginx':
+package {'nginx':
   ensure   => 'installed',
   provider => 'apt',
 }
@@ -9,11 +9,26 @@ exec {'allow http':
   command => '/usr/sbin/ufw allow "Nginx HTTP"'
 }
 
-file_line {'custom header':
+file {'/var/www/html/index.html':
+  ensure => file,
+  content => 'Hello World!'
+}
+
+file {'/var/www/html/404.html':
+  ensure => file,
+  content => 'Ceci n'est pas une page'
+}
+
+file_line {'redirect':
   ensure => 'present',
-  path   => '/etc/nginx/nginx.conf',
-  after  => 'http {',
-  line   => "	add_header X-Served-By ${hostname};",
+  path => '/etc/nginx/sites-available/default',
+  after => 'root /var/www/html',
+  line => 'rewrite ^/redirect_me https://www.digitalocean.com/community permanent;',
+}
+
+file {'/etc/nginx/sites-enabled/default':
+  ensure => file,
+  content => "add_header X-Served-By $HOSTNAME"
 }
 
 service {'nginx':
