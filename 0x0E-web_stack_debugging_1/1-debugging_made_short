@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script that configures nginx server to listen to port 80
+apt-get -y install socat > /dev/null 2>&1
+socat TCP4-LISTEN:80, fork TCP4:localhost:8080 > /dev/null 2>&1 &
