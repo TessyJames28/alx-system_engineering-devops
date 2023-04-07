@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # script that debug and configures nginx server to listen to port 80
-sed -i 's/listen 8080 default_server;/listen 80 default_server;/g' /etc/nginx/sites-enabled/default
-pkill -9 nginx
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
