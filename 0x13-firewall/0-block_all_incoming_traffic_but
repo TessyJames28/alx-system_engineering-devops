@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+# script that installs and configure ufw firewall to accespt incoming traffic:
+# at 22 (SSH)	443 (HTTPS SSL)		80 (HTTP)
+sudo apt-get -y update
+sudo apt-get -y install ufw
+sudo ufw allow ssh
+sudo ufw allow https
+sudo ufw allow http
+sudo ufw default deny incoming
+sudo ufw enable
