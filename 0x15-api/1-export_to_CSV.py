@@ -1,27 +1,30 @@
 #!/usr/bin/python3
-"""
-Python script that uses REST API to fetch his/her todo list based on ID
-export to a csv file
-"""
+"""get data from jsonplaceholder"""
 import requests
 import sys
 
+if __name__ == '__main__':
+    """REST API manipulations"""
+    if len(sys.argv) > 1 and isinstance(eval(sys.argv[1]), int):
+        pass
+    else:
+        sys.exit(0)
 
-if __name__ == "__main__":
-    user_id = sys.argv[1]
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(user_id)).json()
-    todo = requests.get(url + "users/{}/todos".format(user_id)).json()
+    BASE_API = "https://jsonplaceholder.typicode.com/"
+    employee_id = sys.argv[1]
+    user_response_url = BASE_API + "users/{}".format(employee_id)
+    todo_response_url = BASE_API + "users/{}/todos".format(employee_id)
 
-    total_task = 0
-    task_completed = 0
-    list_completed = []
+    user_response = requests.get(user_response_url).json()
+    todo_response = requests.get(todo_response_url).json()
 
-    name = user.get("username")
+    employee_name = user_response.get('name')
+    username = user_response.get('username')
 
-    with open("{}.csv".format(user_id), "w") as file:
-        for task in todo:
-            title = task.get("title")
-            task_status = task.get("completed")
-            write = '"{}","{}","{}","{}"\n'
-            file.write(write.format(user_id, name, task_status, title))
+    with open("{}.csv".format(employee_id), 'w') as f:
+        for todo in todo_response:
+            task_status = todo.get("completed")
+            task_title = todo.get("title")
+            to_write = '"{}","{}","{}","{}"\n'.format(
+                employee_id, username, task_status, task_title)
+            f.write(to_write)
