@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     with open("{}.json".format(user_id), "w") as jsonfile:
         json.dump({user_id: [{
-            "task": task.get("title"),
-            "completed": task.get("completed"),
-            "username": name
+                "task": task.get("title"),
+                "completed": task.get("completed"),
+                "username": name
             } for task in todo]}, jsonfile)
