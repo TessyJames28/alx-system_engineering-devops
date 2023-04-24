@@ -7,8 +7,8 @@ import sys
 if __name__ == "__main__":
     id = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(id)).json
-    todo = requests.get(url + "users/{}/todos".format(id)).json
+    user = requests.get(url + "users/{}".format(id)).json()
+    todo = requests.get(url + "users/{}/todos".format(id)).json()
 
     total_task = 0
     task_completed = 0
