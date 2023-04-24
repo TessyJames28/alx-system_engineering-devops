@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     name = user.get("username")
 
-    with open("{}.csv".format(user_id), "w", newline="") as file:
+    with open("{}.csv".format(user_id), "w") as file:
         for task in todo:
             title = task.get("title")
             task_status = task.get("completed")
