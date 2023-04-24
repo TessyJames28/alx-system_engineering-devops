@@ -12,11 +12,6 @@ if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
     user = requests.get(url + "users/{}".format(user_id)).json()
     todo = requests.get(url + "users/{}/todos".format(user_id)).json()
-
-    total_task = 0
-    task_completed = 0
-    list_completed = []
-
     name = user.get("username")
 
     with open("{}.csv".format(user_id), "w") as file:
