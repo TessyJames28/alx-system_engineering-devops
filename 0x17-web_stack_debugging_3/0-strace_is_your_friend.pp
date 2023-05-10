@@ -1,9 +1,7 @@
-$file_path = '/var/www/html/wp-settings.php'
-$file_contents = file($file_path)
+# puppet script that fix 500 server error for  a GET method
 
-$file_contents = replace($file_contents, /\.phpp'/, ".php'")
-
-file { $file_path:
-  ensure => file,
-  content => $file_contents,
+file { 'replace':
+  ensure   => file,
+  provider => shell,
+  command  => 'sed -i "s/phpp/php/g" /var/www/html/wp-settings.php'
 }
